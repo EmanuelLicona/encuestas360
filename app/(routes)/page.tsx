@@ -1,5 +1,6 @@
 import { UserRound } from "lucide-react";
 import { CardSummary } from "./components/CardSummary";
+import { LastCustomers } from "./components/LastCustomers";
 
 const dataCardSummary = [
   {
@@ -40,6 +41,14 @@ export default function Home() {
           />
         ))}
       </div>
+
+
+
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-12">
+        <LastCustomers />
+        <p>Sales Distribution</p>
+      </div>
+
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const noto = Noto_Sans_Display({
   variable: "--font-noto-sans",
@@ -18,11 +19,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${noto.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <html lang="en"
+      suppressHydrationWarning
+      >
+  <body
+    className={`${noto.variable} antialiased`}
+    
+  >
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  </body>
+    </html >
   );
 }
