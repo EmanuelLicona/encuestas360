@@ -31,9 +31,6 @@ export function SidebarRoutes() {
         </div>
       </div>
       <div>
-        <div>
-
-        </div>
         <Separator />
         <footer className="mt-3 p-3 text-center">
           2025, All Rights Reserved

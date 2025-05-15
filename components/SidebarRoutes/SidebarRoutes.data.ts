@@ -9,8 +9,8 @@ export const dataGeneralSidebar = [
   },
   {
     icon: Building2,
-    label: "Campaigns",
-    href: "/campaigns",
+    label: "Companies",
+    href: "/companies",
   },
   {
     icon: Calendar,
