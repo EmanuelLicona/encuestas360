@@ -14,10 +14,11 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { useState } from "react";
+// import { useState } from "react";
 import { Input } from "@/components/ui/input"
 import { FormCreateCustomerProps } from "./FormCreateCustomer.types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -32,7 +33,7 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
     const { setOpenModalCreate } = props;
 
-    const [photoUploaded, setPhotoUploaded] = useState(false);
+    // const [photoUploaded, setPhotoUploaded] = useState(false);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -53,6 +54,8 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         console.log(data);
         setOpenModalCreate(false);
+
+        toast.success("Company created successfully");
     }
 
     return (
@@ -171,7 +174,7 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
                 </div>
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={!isValid}>Submit</Button>
             </form>
         </Form>
     );

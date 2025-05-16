@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const noto = Noto_Sans_Display({
   variable: "--font-noto-sans",
@@ -21,20 +22,22 @@ export default function RootLayout({
   return (
     <html lang="en"
       suppressHydrationWarning
-      >
-  <body
-    className={`${noto.variable} antialiased`}
-    
-  >
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
     >
-      {children}
-    </ThemeProvider>
-  </body>
+      <body
+        className={`${noto.variable} antialiased`}
+
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+
+        <Toaster />
+      </body>
     </html >
   );
 }

@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "foreignKeys"
+}
+
+model Company {
+  id           String @id @default(uuid()) @db.VarChar(36)
+  userId       String
+  name         String
+  description  String @db.Text
+  profileImage String @db.Text
+  cif          String
+  phone        String
+  country      String
+  website      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contacts Contact[]
+  events   Event[]
+}
+
+model Contact {
+  id    String @id @default(uuid()) @db.VarChar(36)
+  name  String
+  role  String
+  email String
+  phone String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+
+  @@index([companyId(length: 36)])
+}
+
+model Event {
+  id String @id @default(uuid())
+
+  title      String
+  startDate  DateTime
+  allDay     Boolean
+  timeFormat String
+
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId(length: 191)])
+}
