@@ -19,7 +19,6 @@ model Company {
   id           String @id @default(uuid()) @db.VarChar(36)
   userId       String
   name         String
-  description  String @db.Text
   profileImage String @db.Text
   cif          String
   phone        String
@@ -46,7 +45,7 @@ model Contact {
   company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
   companyId String
 
-  @@index([companyId(length: 36)])
+  @@index([companyId])
 }
 
 model Event {
@@ -63,5 +62,5 @@ model Event {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([companyId(length: 191)])
+  @@index([companyId])
 }

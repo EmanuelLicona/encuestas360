@@ -1080,7 +1080,6 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     name: string | null
-    description: string | null
     profileImage: string | null
     cif: string | null
     phone: string | null
@@ -1094,7 +1093,6 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     name: string | null
-    description: string | null
     profileImage: string | null
     cif: string | null
     phone: string | null
@@ -1108,7 +1106,6 @@ export namespace Prisma {
     id: number
     userId: number
     name: number
-    description: number
     profileImage: number
     cif: number
     phone: number
@@ -1124,7 +1121,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     name?: true
-    description?: true
     profileImage?: true
     cif?: true
     phone?: true
@@ -1138,7 +1134,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     name?: true
-    description?: true
     profileImage?: true
     cif?: true
     phone?: true
@@ -1152,7 +1147,6 @@ export namespace Prisma {
     id?: true
     userId?: true
     name?: true
-    description?: true
     profileImage?: true
     cif?: true
     phone?: true
@@ -1239,7 +1233,6 @@ export namespace Prisma {
     id: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -1270,7 +1263,6 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     name?: boolean
-    description?: boolean
     profileImage?: boolean
     cif?: boolean
     phone?: boolean
@@ -1289,7 +1281,6 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     name?: boolean
-    description?: boolean
     profileImage?: boolean
     cif?: boolean
     phone?: boolean
@@ -1299,7 +1290,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "description" | "profileImage" | "cif" | "phone" | "country" | "website" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "profileImage" | "cif" | "phone" | "country" | "website" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contacts?: boolean | Company$contactsArgs<ExtArgs>
     events?: boolean | Company$eventsArgs<ExtArgs>
@@ -1316,7 +1307,6 @@ export namespace Prisma {
       id: string
       userId: string
       name: string
-      description: string
       profileImage: string
       cif: string
       phone: string
@@ -1698,7 +1688,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Company", 'String'>
     readonly userId: FieldRef<"Company", 'String'>
     readonly name: FieldRef<"Company", 'String'>
-    readonly description: FieldRef<"Company", 'String'>
     readonly profileImage: FieldRef<"Company", 'String'>
     readonly cif: FieldRef<"Company", 'String'>
     readonly phone: FieldRef<"Company", 'String'>
@@ -4057,7 +4046,6 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     name: 'name',
-    description: 'description',
     profileImage: 'profileImage',
     cif: 'cif',
     phone: 'phone',
@@ -4110,7 +4098,6 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     name: 'name',
-    description: 'description',
     profileImage: 'profileImage',
     cif: 'cif',
     phone: 'phone',
@@ -4186,7 +4173,6 @@ export namespace Prisma {
     id?: StringFilter<"Company"> | string
     userId?: StringFilter<"Company"> | string
     name?: StringFilter<"Company"> | string
-    description?: StringFilter<"Company"> | string
     profileImage?: StringFilter<"Company"> | string
     cif?: StringFilter<"Company"> | string
     phone?: StringFilter<"Company"> | string
@@ -4202,7 +4188,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     profileImage?: SortOrder
     cif?: SortOrder
     phone?: SortOrder
@@ -4222,7 +4207,6 @@ export namespace Prisma {
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     userId?: StringFilter<"Company"> | string
     name?: StringFilter<"Company"> | string
-    description?: StringFilter<"Company"> | string
     profileImage?: StringFilter<"Company"> | string
     cif?: StringFilter<"Company"> | string
     phone?: StringFilter<"Company"> | string
@@ -4238,7 +4222,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     profileImage?: SortOrder
     cif?: SortOrder
     phone?: SortOrder
@@ -4258,7 +4241,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Company"> | string
     userId?: StringWithAggregatesFilter<"Company"> | string
     name?: StringWithAggregatesFilter<"Company"> | string
-    description?: StringWithAggregatesFilter<"Company"> | string
     profileImage?: StringWithAggregatesFilter<"Company"> | string
     cif?: StringWithAggregatesFilter<"Company"> | string
     phone?: StringWithAggregatesFilter<"Company"> | string
@@ -4414,7 +4396,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -4430,7 +4411,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -4446,7 +4426,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -4462,7 +4441,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -4478,7 +4456,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -4492,7 +4469,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -4506,7 +4482,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -4724,7 +4699,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     profileImage?: SortOrder
     cif?: SortOrder
     phone?: SortOrder
@@ -4738,7 +4712,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     profileImage?: SortOrder
     cif?: SortOrder
     phone?: SortOrder
@@ -4752,7 +4725,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     profileImage?: SortOrder
     cif?: SortOrder
     phone?: SortOrder
@@ -5220,7 +5192,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -5235,7 +5206,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -5266,7 +5236,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -5281,7 +5250,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -5296,7 +5264,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -5311,7 +5278,6 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    description: string
     profileImage: string
     cif: string
     phone: string
@@ -5342,7 +5308,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -5357,7 +5322,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
     cif?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string

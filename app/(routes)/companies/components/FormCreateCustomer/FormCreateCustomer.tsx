@@ -20,6 +20,11 @@ import { FormCreateCustomerProps } from "./FormCreateCustomer.types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
+
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 const formSchema = z.object({
     name: z.string().min(2).max(50),
     country: z.string().min(2).max(50),
@@ -32,10 +37,12 @@ const formSchema = z.object({
 export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
     const { setOpenModalCreate } = props;
+    const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(false);
 
     // const [photoUploaded, setPhotoUploaded] = useState(false);
 
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,11 +58,25 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
     const isValid = form.formState.isValid;
 
-    const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data);
-        setOpenModalCreate(false);
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
 
-        toast.success("Company created successfully");
+        try {
+
+            setIsLoading(true);
+
+            await axios.post("/api/company", data);
+
+            toast.success("Company created successfully");
+
+            router.refresh();
+
+            setOpenModalCreate(false);
+        } catch (error) {
+
+            setIsLoading(false);
+            toast.error(`Company not created successfully ${error}`);
+        }
+
     }
 
     return (
@@ -97,6 +118,7 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
                                     <SelectContent>
                                         <SelectItem value="spain">España</SelectItem>
+                                        <SelectItem value="honduras">Honduras</SelectItem>
                                         <SelectItem value="portugal">Portugal</SelectItem>
                                         <SelectItem value="france">France</SelectItem>
                                         <SelectItem value="germany">Germany</SelectItem>
@@ -174,7 +196,7 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
                 </div>
 
-                <Button type="submit" disabled={!isValid}>Submit</Button>
+                <Button type="submit" disabled={!isValid || isLoading}>Submit</Button>
             </form>
         </Form>
     );
