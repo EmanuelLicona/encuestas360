@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";
+import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
 
@@ -31,10 +31,14 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     const table = useReactTable({
         data,
         columns,
+        onSortingChange: setSorting,
+        onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        // onColumnVisibilityChange
+        // onRowSelectionChange
         state: {
             sorting,
             columnFilters,
@@ -50,9 +54,11 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                 <Input
                     placeholder="Filter emails..."
                     value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) =>
-                        table.getColumn("name")?.setFilterValue(event.target.value)
-                    }
+                    onChange={(event) => {
+                        const value = event.target.value as string;
+
+                        table.getColumn("name")?.setFilterValue(value)
+                    }}
                     className="max-w-sm"
                 />
             </div>
@@ -77,7 +83,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                                <TableRow
+                                    key={row.id}
+                                    data-state={row.getIsSelected() && "selected"}>
                                     {
                                         row.getVisibleCells().map((cell) => (
                                             <TableCell key={cell.id}>

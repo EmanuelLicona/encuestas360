@@ -46,6 +46,7 @@ export const columns: ColumnDef<Company>[] = [
                 <ArrowUpDown className="w-4 h-4 ml-2" />
             </Button>
         ),
+        cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
     },
 
     {
