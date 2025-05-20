@@ -1,22 +1,22 @@
 import { db } from "@/lib/db";
-import { randomUUID } from "crypto";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ companyId: string }> }) {
 
-
-
-export async function POST(req: Request) {
+    const { companyId } = (await params);
     try {
         const data = await req.json();
 
-        const company = await db.company.create({
+        const company = await db.company.update({
+            where: {
+                id: companyId,
+            },
             data: {
-                userId: randomUUID(),
                 ...data,
             },
         });
-
+        
         return NextResponse.json(company);
     }
     catch (error) {
@@ -24,3 +24,6 @@ export async function POST(req: Request) {
         return new NextResponse(`Internal Server Error`, { status: 500 });
     }
 }
+
+
+

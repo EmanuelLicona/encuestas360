@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
+import { MoreHorizontal, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { isValidUrl } from "@/utils/url-utils";
+import { SortIcon } from "@/components/SortIcon";
+import CustomImage from "@/components/CustomImage/CustomImage";
 
 
 export const columns: ColumnDef<Company>[] = [
@@ -17,13 +19,11 @@ export const columns: ColumnDef<Company>[] = [
         accessorKey: "profileImage",
         header: "Profile Image",
         cell: ({ row }) => {
-            let image = row.getValue("profileImage");
-            if (!image || !isValidUrl(image as string)) image = "/logo.svg";
 
             return (
                 <div className="relative h-12 w-12 m-auto">
-                    <Image
-                        src={image as string}
+                    <CustomImage
+                        src={row.getValue("profileImage") as string}
                         alt="Company Profile Image"
                         width={50}
                         height={50}
@@ -43,10 +43,10 @@ export const columns: ColumnDef<Company>[] = [
         header: ({ column }) => (
             <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
                 Company Name
-                <ArrowUpDown className="w-4 h-4 ml-2" />
+
+                <SortIcon direction={column.getIsSorted()} />
             </Button>
         ),
-        cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
     },
 
     {
@@ -57,13 +57,23 @@ export const columns: ColumnDef<Company>[] = [
 
     {
         accessorKey: "phone",
-        header: "Phone",
+        header: ({ column }) => (
+            <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                Phone
+                <SortIcon direction={column.getIsSorted()} />
+            </Button>
+        ),
     },
 
 
     {
         accessorKey: "country",
-        header: "Country",
+        header: ({ column }) => (
+            <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                Country
+                <SortIcon direction={column.getIsSorted()} />
+            </Button>
+        ),
     },
 
     {

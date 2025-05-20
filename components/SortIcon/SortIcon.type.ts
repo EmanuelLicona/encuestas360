@@ -1,0 +1,1 @@
+export type SortIconDirection = "asc" | "desc" | false;
