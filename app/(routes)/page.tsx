@@ -1,6 +1,7 @@
 import { UserRound } from "lucide-react";
 import { CardSummary } from "./components/CardSummary";
 import { LastCustomers } from "./components/LastCustomers";
+import { auth } from "@/auth/auth";
 
 const dataCardSummary = [
   {
@@ -26,7 +27,10 @@ const dataCardSummary = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+
+  const session = await auth()
+
   return (
     <div>
       <h2 className="text-2xl mb-4">Dashbord</h2>
@@ -46,7 +50,12 @@ export default function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mt-12">
         <LastCustomers />
-        <p>Sales Distribution</p>
+        <pre>
+          {
+            JSON.stringify(session, null, 2)
+          }
+
+        </pre>
       </div>
 
     </div>

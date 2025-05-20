@@ -1,6 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
+import saltAndHashPassword from '@/lib/password';
 
 
 export async function GET() {
@@ -28,7 +29,7 @@ export async function GET() {
   const user = await db.user.create({
     data: {
       email: data.email,
-      password: await bcrypt.hash(data.password, 10),
+      password: await saltAndHashPassword(data.password),
     },
   });
 

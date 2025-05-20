@@ -1,3 +1,6 @@
+"use client"
+
+
 import { Menu, Search } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Input } from "../ui/input";
@@ -5,7 +8,14 @@ import { Button } from "../ui/button";
 import { SidebarRoutes } from "../SidebarRoutes";
 import { ToggleTheme } from "../ToggleTheme";
 
+import { signOut } from "next-auth/react";
+
 export function Navbar() {
+
+  const closeSession = async () => {
+    await signOut()
+  }
+
   return (
     <nav className="flex items-center px-2 gap-x-4 md:px-6
       justify-between w-full bg-background border-b h-20">
@@ -30,7 +40,7 @@ export function Navbar() {
 
       <div className="flex gap-x-2 items-center">
         <ToggleTheme />
-        <Button variant="outline">User</Button>
+        <Button variant="outline" onClick={closeSession} >User</Button>
       </div>
 
     </nav>

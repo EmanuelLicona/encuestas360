@@ -191,7 +191,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\alico\\source\\repos\\encuestas360\\prisma\\generated\\prisma",
+      "value": "C:\\Users\\abdiel.licona\\source\\repos\\encuestas360\\prisma\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -205,11 +205,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\alico\\source\\repos\\encuestas360\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\abdiel.licona\\source\\repos\\encuestas360\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
@@ -219,6 +219,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
