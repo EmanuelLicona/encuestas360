@@ -8,12 +8,12 @@ type CustomImageProps = {
     width: number
     height: number
     className: string
-    onError?: (e: any) => void
 }
 
 export default function CustomImage(props: CustomImageProps) {
     let image = props.src;
     if (!image || !isValidUrl(image as string)) image = "/logo.svg";
     const newProps = { ...props, src: image as string }
-    return <Image {...newProps} />;
+
+    return <Image {...newProps}  />;
 }

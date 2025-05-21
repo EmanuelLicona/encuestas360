@@ -1,7 +1,4 @@
-
-"use client";
-
-import { signIn } from "next-auth/react"
+"use client"
 
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -10,9 +7,12 @@ import { Button } from "@/components/ui/button"
 
 
 import { Input } from "@/components/ui/input"
-import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { LoginAction } from "@/app/(auth)/actions/auth-actions"
+import { toast } from "sonner"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 
 const formSchema = z.object({
@@ -21,7 +21,8 @@ const formSchema = z.object({
 })
 
 export function FormLogin() {
-
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,23 +32,22 @@ export function FormLogin() {
   })
 
 
-  const isValid = form.formState.isValid;
+  // const isValid = form.formState.isValid;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    try {
+    const { email, password } = data;
+    setIsLoading(true);
+    const result = await LoginAction(email, password);
+    if (result.success) {
+      toast.success("Login Successful");
 
-      const response = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      })
-
-      toast.success("Company created successfully");
-      console.log(response);
-    } catch (error) {
-      toast.error(`Company not created successfully ${error}`);
-      console.log(error);
+      router.push("/");
+    } else {
+      toast.error(result.error);
+      form.reset();
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -95,7 +95,9 @@ export function FormLogin() {
                 )}
               />
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full"
+              disabled={isLoading}
+              >
                 Login
               </Button>
 

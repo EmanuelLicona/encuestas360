@@ -1,5 +1,5 @@
 import getUserFromDB from "@/lib/user-database"
-import { CredentialsSignin, type NextAuthConfig } from "next-auth"
+import { type NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
 export default {
@@ -12,7 +12,6 @@ export default {
             authorize: async (credentials) => {
                 let user = null
                 user = await getUserFromDB(credentials.email as string, credentials.password as string)
-                if (!user) throw new Error("Invalid credentials sssssss")
                 return user
             },
         }),
@@ -20,8 +19,20 @@ export default {
     pages: {
         signIn: "/login",
     },
-    // callbacks: {
-
-    // },
+    callbacks: {
+        jwt: async ({ token, user }) => {
+            if (user) {
+                token.userId = user.id
+                token.email = user.email
+                token.role = "ADMIN"
+            }
+            return token
+        },
+        session: async ({ session, token }) => {
+            session.user.id = token.userId as string 
+            session.user.email = token.email as string
+            return session
+        },
+    },
     trustHost: true,
 } satisfies NextAuthConfig

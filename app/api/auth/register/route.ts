@@ -1,6 +1,5 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
 import saltAndHashPassword from '@/lib/password';
 
 

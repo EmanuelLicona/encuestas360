@@ -1,7 +1,6 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
 import { CompanyFormProps } from "./CompanyForm.type";
 
 import { useForm } from "react-hook-form";
@@ -21,7 +20,6 @@ import axios from "axios";
 export default function CompanyForm(props: CompanyFormProps) {
   const { company } = props;
 
-  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
 

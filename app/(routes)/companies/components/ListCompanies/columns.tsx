@@ -7,9 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal, Pencil } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { isValidUrl } from "@/utils/url-utils";
 import { SortIcon } from "@/components/SortIcon";
 import CustomImage from "@/components/CustomImage/CustomImage";
 
@@ -28,9 +26,6 @@ export const columns: ColumnDef<Company>[] = [
                         width={50}
                         height={50}
                         className="rounded-full object-cover"
-                        onError={(e) => {
-                            e.currentTarget.src = "/logo.svg";
-                        }}
                     />
                 </div>
             );

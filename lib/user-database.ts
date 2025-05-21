@@ -9,13 +9,12 @@ export default async function getUserFromDB(email: string, pass: string) {
         },
     });
 
-    if (!user) return null
+    if (!user) throw new Error("No user found");
 
     const isPasswordValid = await verifyPassword(pass, user.password)
+    if (!isPasswordValid) throw new Error("Invalid password");
 
-    if (!isPasswordValid) return null
-
-    const { password, ...userWithoutPassword } = user
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user
     return userWithoutPassword
 }
