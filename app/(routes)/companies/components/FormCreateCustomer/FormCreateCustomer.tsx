@@ -66,11 +66,9 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
 
             await axios.post("/api/company", data);
 
-            toast.success("Company created successfully");
-
             router.refresh();
-
             setOpenModalCreate(false);
+            toast.success("Company created successfully");
         } catch (error) {
 
             setIsLoading(false);

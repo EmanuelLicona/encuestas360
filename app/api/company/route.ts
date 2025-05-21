@@ -24,3 +24,19 @@ export async function POST(req: Request) {
         return new NextResponse(`Internal Server Error`, { status: 500 });
     }
 }
+
+
+export async function GET() {
+    try {
+        const companies = await db.company.findMany({
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+        return NextResponse.json(companies);
+    }
+    catch (error) {
+        console.log(`[COMPANY] Error: ${error}`);
+        return new NextResponse(`Internal Server Error`, { status: 500 });
+    }
+}

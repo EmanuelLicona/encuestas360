@@ -15,5 +15,5 @@ export default function CustomImage(props: CustomImageProps) {
     if (!image || !isValidUrl(image as string)) image = "/logo.svg";
     const newProps = { ...props, src: image as string }
 
-    return <Image {...newProps}  />;
+    return <Image {...newProps} alt=""  />;
 }
