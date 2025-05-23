@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";
+import { ColumnDef /*, ColumnFiltersState*/, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";  
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 interface DataTableProps<TData, TValue> {
@@ -14,35 +14,41 @@ interface DataTableProps<TData, TValue> {
 }
 
 
+
+
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
 
-    const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [sorting, setSorting] = useState<SortingState>([]);
+    // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+    const [isMounted, setIsMounted] = useState(false);
 
 
-    const [isMounted, setIsMounted] = React.useState(false);
-
-
-    React.useEffect(() => {
+    useEffect(() => {
         setIsMounted(true);
     }, []);
 
+
+    const [globalFilter, setGlobalFilter] = useState([])
 
     const table = useReactTable({
         data,
         columns,
         onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
+        // onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        // onGlobalFilterChange: setColumnFilters,
         // onColumnVisibilityChange
         // onRowSelectionChange
         state: {
             sorting,
-            columnFilters,
+            // columnFilters,
+            globalFilter
         },
+        onGlobalFilterChange: setGlobalFilter,
     });
 
     if (!isMounted) return null;
@@ -53,12 +59,13 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             <div className="flex items-center mb-2">
                 <Input
                     placeholder="Filter emails..."
-                    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) => {
-                        const value = event.target.value as string;
+                    // value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+                    onChange={e => table.setGlobalFilter(String(e.target.value))}
+                    // onChange={(event) => {
+                    //     const value = event.target.value as string;
 
-                        table.getColumn("name")?.setFilterValue(value)
-                    }}
+                    //     table.getColumn("name")?.setFilterValue(value)
+                    // }}
                     className="max-w-sm"
                 />
             </div>

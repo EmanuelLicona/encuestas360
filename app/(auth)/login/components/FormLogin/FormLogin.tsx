@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { LoginAction } from "@/app/(auth)/actions/auth-actions"
+import { LoginAction } from "@/app/actions/auth-actions"
 import { toast } from "sonner"
 import { useState } from "react"
 import { useRouter } from "next/navigation"

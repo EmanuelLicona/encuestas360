@@ -1,12 +1,18 @@
 // "use client";
 
-import { db } from "@/lib/db";
+// import { db } from "@/lib/db";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import { getCompanies } from "@/app/actions/companies-actions";
+// import { connection } from "next/server";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 
 export default async function ListCompanies() {
+
+    const companies  = await getCompanies();
+
+    // await connection();
 
     // const { userId } = auth();
     // if (!userId) {
@@ -14,11 +20,11 @@ export default async function ListCompanies() {
     // }
 
 
-    const companies = await db.company.findMany({
-        orderBy: {
-            createdAt: "desc",
-        },
-    });
+    // const companies = await db.company.findMany({
+    //     orderBy: {
+    //         createdAt: "desc",
+    //     },
+    // });
 
     // const [companies, setCompanies] = useState([]);
     // const [isLoading, setIsLoading] = useState(false);
